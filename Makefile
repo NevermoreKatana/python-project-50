@@ -3,6 +3,10 @@ install:
 build:
 	 poetry build
 
+test:
+	poetry run gendiff -h
+
+
 publish:
 	poetry publish --dry-run
 
