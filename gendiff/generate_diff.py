@@ -4,7 +4,6 @@ PATH_TO_FILE1 = 'difference_calculator/file1.json'
 PATH_TO_FILE2 = 'difference_calculator/file2.json'
 
 
-
 def generate_diff(filename1, filename2):
     fn1 = json.load(open(filename1))
     fn2 = json.load(open(filename2))
