@@ -11,7 +11,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-
+gendiff = "*"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
@@ -21,4 +21,5 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-gendiff = "difference_calculator.scripts.gendiff:main"
+gendiff = "difference_calculator.pars:main"
+test = "difference_calculator.gendiff.generate_diff:main"
