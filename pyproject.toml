@@ -14,11 +14,12 @@ python = "^3.10"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
+pytest = "^7.4.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-gendiff = "difference_calculator.pars:main"
-test = "difference_calculator.gendiff.generate_diff:main"
+cmd_gendiff = "difference_calculator.cmd_gendiff:main"
+gendiff = "difference_calculator.gendiff.generate_diff:main"

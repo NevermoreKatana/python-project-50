@@ -20,10 +20,10 @@ def generate_diff(filename1, filename2):
             result[f'+ {i}'] = fn2[i]
             del fn1[i], fn2[i]
     for i in fn2:
-        result[f"  {i}"] = fn2[i]
+        result[f"+ {i}"] = fn2[i]
         del i
     print(json.dumps(result, indent=2))
-    return result
+    return json.dumps(result, indent=2)
 
 
 def main():

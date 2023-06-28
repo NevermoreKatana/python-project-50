@@ -3,10 +3,12 @@ install:
 build:
 	 poetry build
 
+cmd_gendiff:
+	poetry run cmd_gendiff -h
 gendiff:
 	poetry run test
 test:
-	poetry run gendiff -h
+	poetry run pytest
 publish:
 	poetry publish --dry-run
 
