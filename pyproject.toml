@@ -11,7 +11,6 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-gendiff = "*"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
