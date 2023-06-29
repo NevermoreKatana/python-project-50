@@ -10,7 +10,7 @@ gendiff:
 test:
 	poetry run pytest
 test-coverage:
-	poetry run pytest --cov=hexlet-python_package-50 --cov-report xml
+	poetry run pytest --cov=difference_calculator --cov-report xml
 
 publish:
 	poetry publish --dry-run
