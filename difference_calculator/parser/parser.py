@@ -1,6 +1,6 @@
-
 import yaml
 import json
+
 
 def parser(path_to_file1, path_to_file2):
     from difference_calculator.gendiff.generate_diff import gendiff
@@ -16,6 +16,9 @@ def parser(path_to_file1, path_to_file2):
     fn2 = json.load(open(path_to_file2))
     return gendiff(fn1, fn2)
 
+
 def main():
-    parser('difference_calculator/file1.yml', 'difference_calculator/file2.yml')
-    parser('difference_calculator/file1.json', 'difference_calculator/file2.json')
+    parser('difference_calculator/file1.yml',
+           'difference_calculator/file2.yml')
+    parser('difference_calculator/file1.json',
+           'difference_calculator/file2.json')

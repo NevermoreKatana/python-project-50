@@ -7,6 +7,7 @@ PATH_TO_FILE2 = 'difference_calculator/file2.json'
 PATH_TO_FILE1YMl = 'difference_calculator/file1.yml'
 PATH_TO_FILE2YMl = 'difference_calculator/file2.yml'
 
+
 def gendiff(file1, file2):
     result = dict()
     for i in sorted(file1.keys()):
@@ -25,6 +26,10 @@ def gendiff(file1, file2):
         del i
     print(json.dumps(result, indent=2))
     return json.dumps(result, indent=2)
+
+
 def main():
-    parser('difference_calculator/file1.yml', 'difference_calculator/file2.yml')
-    parser('difference_calculator/file1.json', 'difference_calculator/file2.json')
+    parser('difference_calculator/file1.yml',
+           'difference_calculator/file2.yml')
+    parser('difference_calculator/file1.json',
+           'difference_calculator/file2.json')
