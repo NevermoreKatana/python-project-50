@@ -29,7 +29,7 @@ jobs:
         run: |
           make lint
           make test
-      - name: Test & publish code coverage
+      - name: Сode coverage
         uses: paambaati/codeclimate-action@v3.2.0
         if: github.ref_name == 'main'
         env:
