@@ -9,6 +9,9 @@ gendiff:
 	poetry run test
 test:
 	poetry run pytest
+test-coverage:
+	poetry run pytest --cov=hexlet-python_package-50 --cov-report xml
+
 publish:
 	poetry publish --dry-run
 
