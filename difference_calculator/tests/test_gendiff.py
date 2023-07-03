@@ -20,14 +20,12 @@ PATH_TO_FAILURE_TEST_YML = 'difference_calculator/tests/' \
 def test_hexlet_json():
     file = json.load(open(PATH_TO_HEXLET_TEST_JSON))
     file = json.dumps(file, indent=2)
-
     assert parser(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON) == file
 
 
 def test_failure_json():
     file = json.load(open(PATH_TO_FAILURE_TEST_JSON))
     file = json.dumps(file, indent=2)
-
     assert parser(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON) != file
 
 
