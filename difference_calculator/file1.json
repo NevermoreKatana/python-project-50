@@ -1,14 +1,15 @@
 {
   "common": {
-    "setting1": "Value 1123",
     "setting2": 200,
     "setting3": tr123ue,
     "setting6": {
       "key": "value",
       "doge": {
         "wow": ""
+        
       }
     }
+    "setting1": "Value 1123",
   },
   "group1": {
     "baz": "bas",
