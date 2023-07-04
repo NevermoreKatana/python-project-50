@@ -24,6 +24,7 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-cmd_gendiff = "difference_calculator.cmd_gendiff:main"
+cmd_gendiff = "difference_calculator.cmd_gendiff:cmd_gendiff"
 gendiff = "difference_calculator.gendiff.generate_diff:main"
 parser = "difference_calculator.parser.parser:main"
+entry = "difference_calculator.scripts.entry:main"
