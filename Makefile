@@ -9,8 +9,10 @@ gendiff:
 	poetry run gendiff
 test:
 	poetry run pytest
-entry:
+entry_p:
 	 poetry run entry -f plain difference_calculator/file1.json difference_calculator/file2.json
+entry_j:
+	 poetry run entry -f json difference_calculator/file1.json difference_calculator/file2.json
 test-coverage:
 	poetry run pytest --cov=difference_calculator --cov-report xml
 pars:
