@@ -1,7 +1,6 @@
 from difference_calculator.formatting.plain_format import generate_diff_plain
 from difference_calculator.parser.parser import pars
-import json
-import yaml
+
 
 PATH_TO_FILE1_JSON = 'difference_calculator/file1.json'
 PATH_TO_FILE2_JSON = 'difference_calculator/file2.json'
@@ -13,8 +12,6 @@ PATH_TO_HEXLET_TEST = 'difference_calculator/tests/' \
                            'fixtures/plain_test.txt'
 PATH_TO_FAILURE_TEST = 'difference_calculator/tests/' \
                             'fixtures/plain_failure_test.txt'
-
-
 
 
 def test_plain_json():
