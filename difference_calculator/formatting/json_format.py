@@ -47,6 +47,7 @@ def format_diff(diff):
             formatted_diff[key] = format_diff(item['children'])
         else:
             formatted_diff[key] = item['value']
+
     return formatted_diff
 
 
