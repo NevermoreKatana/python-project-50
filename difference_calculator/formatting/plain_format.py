@@ -66,8 +66,8 @@ def format_value(value):
         return str(value)
 
 
-def generate_diff_plain(file_path1, file_path2):
-    diff = generate_diff(file_path1, file_path2)
+def generate_diff_plain(data1, data2):
+    diff = generate_diff(data1, data2)
     diff_string = '\n'.join(format_diff_plain(diff))
     print(diff_string)
     return diff_string
