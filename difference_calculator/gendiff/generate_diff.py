@@ -1,11 +1,11 @@
 import json
 from difference_calculator.parser.parser import pars
 
-PATH_TO_FILE1_JSON = "difference_calculator/file1.json"
-PATH_TO_FILE2_JSON = "difference_calculator/file2.json"
+PATH_TO_FILE1_JSON = "example_files/file1.json"
+PATH_TO_FILE2_JSON = "example_files/file2.json"
 
-PATH_TO_FILE1_YML = 'difference_calculator/file1.yml'
-PATH_TO_FILE2_YML = 'difference_calculator/file2.yml'
+PATH_TO_FILE1_YML = 'example_files/file1.yml'
+PATH_TO_FILE2_YML = 'example_files/file2.yml'
 
 
 def compare_values(value1, value2):
