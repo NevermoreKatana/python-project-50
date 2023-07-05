@@ -9,6 +9,8 @@ gendiff:
 	poetry run gendiff
 test:
 	poetry run pytest
+entry:
+	 poetry run entry example_files/file1.json example_files/file2.json
 entry_p:
 	 poetry run entry -f plain example_files/file1.json example_files/file2.json
 entry_j:

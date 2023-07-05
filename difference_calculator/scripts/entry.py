@@ -13,4 +13,4 @@ def main():
     elif FORMAT == 'json':
         generate_diff_dict_json(data1, data2)
     else:
-        generate_diff_dict_json(data1, data2)
+        generate_diff_dict(data1, data2)
