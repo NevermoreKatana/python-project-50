@@ -1,5 +1,5 @@
 import json
-from difference_calculator.gendiff.parser import pars
+from difference_calculator.parser import file_type
 
 PATH_TO_FILE1_JSON = "example_files/file1.json"
 PATH_TO_FILE2_JSON = "example_files/file2.json"
@@ -71,5 +71,5 @@ def generate_diff_dict(data1, data2):
 
 
 def main():
-    data1, data2 = pars(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
+    data1, data2 = file_type(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     generate_diff_dict(data1, data2)
