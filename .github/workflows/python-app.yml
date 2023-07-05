@@ -27,6 +27,10 @@ jobs:
       run: |
         pip install poetry
         make install
+    - name: Run plain/json format
+      run: |
+        make entry_p
+        make entry_j
     - name: Run linter and pytest
       run: |
         make lint

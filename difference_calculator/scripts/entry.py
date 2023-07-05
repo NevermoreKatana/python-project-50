@@ -9,10 +9,8 @@ def main():
     PATH_TO_FILE1, PATH_TO_FILE2, FORMAT = cmd_gendiff()
     data1, data2 = pars(PATH_TO_FILE1, PATH_TO_FILE2)
     if FORMAT == 'plain':
-        generate_diff_dict(data1, data2)
         generate_diff_plain(data1, data2)
-    if FORMAT == 'json':
+    elif FORMAT == 'json':
         generate_diff_dict_json(data1, data2)
-
     else:
         generate_diff_dict_json(data1, data2)
