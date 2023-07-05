@@ -13,21 +13,27 @@ def generate_diff(data1, data2, path=''):
     for key in sorted(keys):
         current_path = f"{path}.{key}" if path else key
         if key not in data1:
-            diff.append({'path': current_path,
-                         'status': 'added', 'value': data2[key]})
+            diff.append({
+                'path': current_path,
+                'status': 'added',
+                'value': data2[key]
+            })
         elif key not in data2:
-            diff.append({'path': current_path,
-                         'status': 'removed', 'value': data1[key]})
+            diff.append({
+                'path': current_path,
+                'status': 'removed',
+                'value': data1[key]
+            })
         else:
             value1 = data1[key]
             value2 = data2[key]
             if isinstance(value1, dict) and isinstance(value2, dict):
-                diff.extend(generate_diff(value1, value2, current_path))
+                sub_diff = generate_diff(value1, value2, current_path)
+                diff.extend(sub_diff)
             else:
                 comparison_result = compare_values(value1, value2)
                 diff.append({
                     'path': current_path,
-                    'status': comparison_result['status'],
                     **comparison_result
                 })
     return diff
