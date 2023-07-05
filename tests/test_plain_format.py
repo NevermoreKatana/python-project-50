@@ -1,5 +1,5 @@
 from difference_calculator.formatting.plain_format import generate_diff_plain
-from difference_calculator.parser.parser import pars
+from difference_calculator.gendiff.parser import pars
 
 
 PATH_TO_FILE1_JSON = 'example_files/file1.json'
@@ -50,3 +50,6 @@ def test_failure_plain_yml():
     result = generate_diff_plain(data1, data2)
 
     assert result != file
+
+
+

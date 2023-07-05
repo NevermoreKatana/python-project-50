@@ -1,7 +1,7 @@
 import json
 
 from difference_calculator.formatting.json_format import generate_diff_dict_json
-from difference_calculator.parser.parser import pars
+from difference_calculator.gendiff.parser import pars
 
 
 PATH_TO_FILE1_JSON = 'example_files/file1.json'
