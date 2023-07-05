@@ -1,11 +1,9 @@
-
-
 def compare_values(value1, value2):
     if isinstance(value1, dict) and isinstance(value2, dict):
         return generate_diff(value1, value2)
     elif value1 == value2:
         return {'status': 'unchanged', 'value': value1}
-    elif value1 != value2:
+    else:
         return {'status': 'changed', 'old_value': value1, 'new_value': value2}
 
 
@@ -15,11 +13,9 @@ def generate_diff(data1, data2, path=''):
     for key in sorted(keys):
         current_path = f"{path}.{key}" if path else key
         if key not in data1:
-            diff.append({'path': current_path,
-                         'status': 'added', 'value': data2[key]})
+            diff.append({'path': current_path, 'status': 'added', 'value': data2[key]})
         elif key not in data2:
-            diff.append({'path': current_path,
-                         'status': 'removed', 'value': data1[key]})
+            diff.append({'path': current_path, 'status': 'removed', 'value': data1[key]})
         else:
             value1 = data1[key]
             value2 = data2[key]
@@ -27,11 +23,11 @@ def generate_diff(data1, data2, path=''):
                 diff.extend(generate_diff(value1, value2, current_path))
             else:
                 comparison_result = compare_values(value1, value2)
-                diff.append({'path': current_path,
-                             'status': comparison_result['status'],
-                             'value': comparison_result.get('value'),
-                             'old_value': comparison_result.get('old_value'),
-                             'new_value': comparison_result.get('new_value')})
+                diff.append({
+                    'path': current_path,
+                    'status': comparison_result['status'],
+                    **comparison_result
+                })
     return diff
 
 
@@ -48,10 +44,7 @@ def format_diff_plain(diff):
         elif status == 'changed':
             old_value = format_value(item['old_value'])
             new_value = format_value(item['new_value'])
-            lines.append(f"Property '{path}'"
-                         f" was updated. From {old_value} to {new_value}")
-        else:
-            continue
+            lines.append(f"Property '{path}' was updated. From {old_value} to {new_value}")
     return lines
 
 
