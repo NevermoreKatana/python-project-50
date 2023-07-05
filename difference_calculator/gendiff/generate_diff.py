@@ -1,5 +1,5 @@
 import json
-from difference_calculator.parser.parser import pars
+from difference_calculator.gendiff.parser import pars
 
 PATH_TO_FILE1_JSON = "example_files/file1.json"
 PATH_TO_FILE2_JSON = "example_files/file2.json"
@@ -38,6 +38,7 @@ def generate_diff(data1, data2):
                              'value': comparison_result.get('value'),
                              'old_value': comparison_result.get('old_value'),
                              'new_value': comparison_result.get('new_value')}
+    # print(json.dumps(diff, indent=2))
     return diff
 
 
@@ -57,6 +58,7 @@ def format_diff(diff):
             formatted_diff[key] = nested_diff
         else:
             formatted_diff[f"  {key}"] = item['value']
+    # print(json.dumps(formatted_diff, indent=2))
     return formatted_diff
 
 
@@ -64,7 +66,7 @@ def generate_diff_dict(data1, data2):
     diff = generate_diff(data1, data2)
     formatted_diff = format_diff(diff)
     formatted_diff = json.dumps(formatted_diff, indent=2)
-    print(formatted_diff)
+    # print(formatted_diff)
     return formatted_diff
 
 

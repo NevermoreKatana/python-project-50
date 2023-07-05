@@ -1,5 +1,5 @@
 from difference_calculator.gendiff.generate_diff import generate_diff_dict
-from difference_calculator.parser.parser import pars
+from difference_calculator.gendiff.parser import pars
 from difference_calculator.formatting.plain_format import generate_diff_plain
 from difference_calculator.cmd_gendiff import cmd_gendiff
 from difference_calculator.formatting.json_format import generate_diff_dict_json
