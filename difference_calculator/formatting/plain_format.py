@@ -13,9 +13,11 @@ def generate_diff(data1, data2, path=''):
     for key in sorted(keys):
         current_path = f"{path}.{key}" if path else key
         if key not in data1:
-            diff.append({'path': current_path, 'status': 'added', 'value': data2[key]})
+            diff.append({'path': current_path,
+                         'status': 'added', 'value': data2[key]})
         elif key not in data2:
-            diff.append({'path': current_path, 'status': 'removed', 'value': data1[key]})
+            diff.append({'path': current_path,
+                         'status': 'removed', 'value': data1[key]})
         else:
             value1 = data1[key]
             value2 = data2[key]
@@ -44,7 +46,8 @@ def format_diff_plain(diff):
         elif status == 'changed':
             old_value = format_value(item['old_value'])
             new_value = format_value(item['new_value'])
-            lines.append(f"Property '{path}' was updated. From {old_value} to {new_value}")
+            lines.append(f"Property '{path}' was updated."
+                         f" From {old_value} to {new_value}")
     return lines
 
 
