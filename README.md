@@ -23,13 +23,13 @@ make package-install
 ## Usage
 
 ```sh
-poetry run entry -f plain difference_calculator/file1.json difference_calculator/file2.json
+poetry run entry -f plain example_files/file1.json example_files/file2.json
 ```
 ```sh
-poetry run entry -f json difference_calculator/file1.json difference_calculator/file2.json
+poetry run entry -f json example_files/file1.json example_files/file2.json
 ```
 ```sh
-poetry run entry difference_calculator/file1.json difference_calculator/file2.json
+poetry run entry example_files/file1.json example_files/file2.json
 ```
 
 ### Hexlet tests and linter status:
