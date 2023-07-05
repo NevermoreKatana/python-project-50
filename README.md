@@ -9,8 +9,28 @@
 
 Генерация отчета в виде plain text, stylish и json
 
+## Установка игр сразу в систему
 
+```sh
+make install
+```
+```sh
+make build
+```
+```sh
+make package-install
+```
+## Usage
 
+```sh
+poetry run entry -f plain difference_calculator/file1.json difference_calculator/file2.json
+```
+```sh
+poetry run entry -f json difference_calculator/file1.json difference_calculator/file2.json
+```
+```sh
+poetry run entry difference_calculator/file1.json difference_calculator/file2.json
+```
 
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/NevermoreKatana/python-project-50/workflows/hexlet-check/badge.svg)](https://github.com/NevermoreKatana/python-project-50/actions) <a href="https://codeclimate.com/github/NevermoreKatana/python-project-50/maintainability"><img src="https://api.codeclimate.com/v1/badges/dab58b38c4e5848d84b2/maintainability" /></a> <a href="https://codeclimate.com/github/NevermoreKatana/python-project-50/test_coverage"><img src="https://api.codeclimate.com/v1/badges/dab58b38c4e5848d84b2/test_coverage" /></a> [![My test](https://github.com/NevermoreKatana/python-project-50/actions/workflows/python-app.yml/badge.svg)](https://github.com/NevermoreKatana/python-project-50/actions/workflows/python-app.yml)
