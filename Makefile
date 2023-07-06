@@ -16,7 +16,7 @@ entry_p:
 entry_j:
 	 poetry run entry -f json example_files/file1.json example_files/file2.json
 test-coverage:
-	poetry run pytest --cov=difference_calculator --cov-report xml
+	poetry run pytest --cov=gendiff --cov-report xml
 pars:
 	poetry run parser
 publish:
@@ -26,4 +26,4 @@ package-install:
 	python3 -m pip install --user dist/*.whl
 
 make lint:
-	poetry run flake8 difference_calculator
+	poetry run flake8 gendiff

@@ -72,4 +72,5 @@ def generate_diff_plain(data1, data2):
     diff = generate_diff(data1, data2)
     diff_string = '\n'.join(format_diff_plain(diff))
     print(diff_string)
+    print(type(diff_string))
     return diff_string
