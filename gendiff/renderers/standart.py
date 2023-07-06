@@ -1,5 +1,4 @@
 import json
-
 from gendiff.parser import file_type
 
 PATH_TO_FILE1_JSON = "example_files/file1.json"
@@ -29,47 +28,45 @@ def generate_diff(data1, data2):
         else:
             value1 = data1[key]
             value2 = data2[key]
-            if isinstance(value1, dict) and isinstance(value2, dict):
-                diff[key] = {'status': 'nested', 'children': generate_diff(value1, value2)}
+            if isinstance(value1, dict) and \
+                    isinstance(value2, dict):
+                diff[key] = {'status': 'nested',
+                             'children': generate_diff(value1, value2)}
             else:
                 comparison_result = compare_values(value1, value2)
-                diff[key] = {
-                    'status': comparison_result['status'],
-                    'value': comparison_result.get('value'),
-                    'old_value': comparison_result.get('old_value'),
-                    'new_value': comparison_result.get('new_value')
-                }
+                diff[key] = {'status': comparison_result['status'],
+                             'value': comparison_result.get('value'),
+                             'old_value': comparison_result.get('old_value'),
+                             'new_value': comparison_result.get('new_value')}
+    # print(json.dumps(diff, indent=2))
     return diff
 
 
-
-def format_diff(diff, indent=0):
+def format_diff(diff):
     formatted_diff = {}
     for key, item in diff.items():
         status = item['status']
-        indent_str = " " * indent
         if status == 'added':
-            formatted_diff[indent_str + f"+ {key}"] = item['value']
+            formatted_diff[f"+ {key}"] = item['value']
         elif status == 'removed':
-            formatted_diff[indent_str + f"- {key}"] = item['value']
+            formatted_diff[f"- {key}"] = item['value']
         elif status == 'changed':
-            formatted_diff[indent_str + f"- {key}"] = item['old_value']
-            formatted_diff[indent_str + f"+ {key}"] = item['new_value']
+            formatted_diff[f"- {key}"] = item['old_value']
+            formatted_diff[f"+ {key}"] = item['new_value']
         elif status == 'nested':
-            nested_diff = format_diff(item['children'], indent=indent+2)
+            nested_diff = format_diff(item['children'])
             formatted_diff[key] = nested_diff
         else:
-            formatted_diff[indent_str + f"  {key}"] = item['value']
+            formatted_diff[f"  {key}"] = item['value']
+    # print(json.dumps(formatted_diff, indent=2))
     return formatted_diff
-
 
 
 def generate_diff_dict(data1, data2):
     diff = generate_diff(data1, data2)
     formatted_diff = format_diff(diff)
-    # formatted_diff = json.dumps(formatted_diff, indent=2)
+    formatted_diff = json.dumps(formatted_diff, indent=2)
     print(formatted_diff)
-    # print(type(formatted_diff))
     return formatted_diff
 
 
