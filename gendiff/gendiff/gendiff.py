@@ -18,4 +18,4 @@ def main():
 
 def generate_diff(PATH_TO_FILE1, PATH_TO_FILE2):
     data1, data2 = file_type(PATH_TO_FILE1, PATH_TO_FILE2)
-    generate_diff_dict(data1, data2)
+    return generate_diff_dict(data1, data2)
