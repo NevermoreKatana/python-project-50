@@ -67,7 +67,7 @@ def format_diff(diff, indent=0):
 def generate_diff_dict(data1, data2):
     diff = generate_diff(data1, data2)
     formatted_diff = format_diff(diff)
-    formatted_diff = json.dumps(formatted_diff, indent=2)
+    # formatted_diff = json.dumps(formatted_diff, indent=2)
     print(formatted_diff)
     # print(type(formatted_diff))
     return formatted_diff
