@@ -29,17 +29,18 @@ def generate_diff(data1, data2):
         else:
             value1 = data1[key]
             value2 = data2[key]
-            if isinstance(value1, dict) and \
-                    isinstance(value2, dict):
-                diff[key] = {'status': 'nested',
-                             'children': generate_diff(value1, value2)}
+            if isinstance(value1, dict) and isinstance(value2, dict):
+                diff[key] = {'status': 'nested', 'children': generate_diff(value1, value2)}
             else:
                 comparison_result = compare_values(value1, value2)
-                diff[key] = {'status': comparison_result['status'],
-                             'value': comparison_result.get('value'),
-                             'old_value': comparison_result.get('old_value'),
-                             'new_value': comparison_result.get('new_value')}
+                diff[key] = {
+                    'status': comparison_result['status'],
+                    'value': comparison_result.get('value'),
+                    'old_value': comparison_result.get('old_value'),
+                    'new_value': comparison_result.get('new_value')
+                }
     return diff
+
 
 
 def format_diff(diff, indent=0):
@@ -66,7 +67,7 @@ def format_diff(diff, indent=0):
 def generate_diff_dict(data1, data2):
     diff = generate_diff(data1, data2)
     formatted_diff = format_diff(diff)
-    # formatted_diff = json.dumps(formatted_diff, indent=2)
+    formatted_diff = json.dumps(formatted_diff, indent=2)
     print(formatted_diff)
     # print(type(formatted_diff))
     return formatted_diff
