@@ -5,7 +5,7 @@ from gendiff.parser import cmd_gendiff
 from gendiff.renderers.json import generate_diff_dict_json
 
 
-def generate_diff(PATH_TO_FILE1, PATH_TO_FILE2):
+def main():
     PATH_TO_FILE1, PATH_TO_FILE2, FORMAT = cmd_gendiff()
     data1, data2 = file_type(PATH_TO_FILE1, PATH_TO_FILE2)
     if FORMAT == 'plain':
@@ -14,3 +14,8 @@ def generate_diff(PATH_TO_FILE1, PATH_TO_FILE2):
         generate_diff_dict_json(data1, data2)
     else:
         generate_diff_dict(data1, data2)
+
+
+def generate_diff(PATH_TO_FILE1, PATH_TO_FILE2):
+    data1, data2 = file_type(PATH_TO_FILE1, PATH_TO_FILE2)
+    generate_diff_dict(data1, data2)
