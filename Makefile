@@ -5,7 +5,7 @@ build:
 
 cmd_gendiff:
 	poetry run cmd_gendiff -h
-gendiff:
+gendif:
 	poetry run gendiff
 test:
 	poetry run pytest

@@ -1,8 +1,8 @@
-from difference_calculator.renderers.standart import generate_diff_dict
-from difference_calculator.parser import file_type
-from difference_calculator.renderers.plain import generate_diff_plain
-from difference_calculator.parser import cmd_gendiff
-from difference_calculator.renderers.json import generate_diff_dict_json
+from gendiff.renderers.standart import generate_diff_dict
+from gendiff.parser import file_type
+from gendiff.renderers.plain import generate_diff_plain
+from gendiff.parser import cmd_gendiff
+from gendiff.renderers.json import generate_diff_dict_json
 
 
 def main():

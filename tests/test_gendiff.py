@@ -1,7 +1,7 @@
 import json
 import yaml
-from difference_calculator.parser import file_type
-from difference_calculator.renderers.standart import (
+from gendiff.parser import file_type
+from gendiff.renderers.standart import (
     compare_values,
     format_diff,
     generate_diff_dict,

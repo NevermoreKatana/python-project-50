@@ -1,5 +1,5 @@
 import json
-from difference_calculator.parser import file_type
+from gendiff.parser import file_type
 
 PATH_TO_FILE1_JSON = "example_files/file1.json"
 PATH_TO_FILE2_JSON = "example_files/file2.json"
