@@ -47,12 +47,12 @@ def format_diff(diff):
     for key, item in diff.items():
         status = item['status']
         if status == 'added':
-            formatted_diff[f"+ {key}"] = item['value']
+            formatted_diff["+ " + str(key)] = item['value']
         elif status == 'removed':
-            formatted_diff[f"- {key}"] = item['value']
+            formatted_diff["- " + str(key)] = item['value']
         elif status == 'changed':
-            formatted_diff[f"- {key}"] = item['old_value']
-            formatted_diff[f"+ {key}"] = item['new_value']
+            formatted_diff["- " + str(key)] = item['old_value']
+            formatted_diff["+ " + str(key)] = item['new_value']
         elif status == 'nested':
             nested_diff = format_diff(item['children'])
             formatted_diff[key] = nested_diff
@@ -65,7 +65,7 @@ def format_diff(diff):
 def generate_diff_dict(data1, data2):
     diff = generate_diff(data1, data2)
     formatted_diff = format_diff(diff)
-    formatted_diff = json.dumps(formatted_diff, indent=3)
+    formatted_diff = json.dumps(formatted_diff, indent=2)
     print(formatted_diff)
     return formatted_diff
 
