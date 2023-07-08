@@ -1,4 +1,3 @@
-import json
 from gendiff.parser import file_type
 
 PATH_TO_FILE1_JSON = "example_files/file1.json"
@@ -38,34 +37,32 @@ def generate_diff(data1, data2):
                              'value': comparison_result.get('value'),
                              'old_value': comparison_result.get('old_value'),
                              'new_value': comparison_result.get('new_value')}
-    # print(json.dumps(diff, indent=2))
     return diff
 
 
-def format_diff(diff):
-    formatted_diff = {}
+def format_diff(diff, indent=0):
+    formatted_diff = []
     for key, item in diff.items():
         status = item['status']
         if status == 'added':
-            formatted_diff["+ " + str(key)] = item['value']
+            line = f"+ {key}: {item['value']}"
         elif status == 'removed':
-            formatted_diff["- " + str(key)] = item['value']
+            line = f"- {key}: {item['value']}"
         elif status == 'changed':
-            formatted_diff["- " + str(key)] = item['old_value']
-            formatted_diff["+ " + str(key)] = item['new_value']
+            line = f"- {key}: {item['old_value']}\n"
+            line += f"+ {key}: {item['new_value']}"
         elif status == 'nested':
-            nested_diff = format_diff(item['children'])
-            formatted_diff[key] = nested_diff
+            nested_diff = format_diff(item['children'], indent + 1)
+            line = f"  {key}: {nested_diff}"
         else:
-            formatted_diff[f"  {key}"] = item['value']
-    # print(json.dumps(formatted_diff, indent=2))
-    return formatted_diff
+            line = f"  {key}: {item['value']}"
+        formatted_diff.append("  " * indent + line)
+    return "\n".join(formatted_diff)
 
 
 def generate_diff_dict(data1, data2):
     diff = generate_diff(data1, data2)
     formatted_diff = format_diff(diff)
-    formatted_diff = json.dumps(formatted_diff, indent=2)
     print(formatted_diff)
     return formatted_diff
 
@@ -73,3 +70,7 @@ def generate_diff_dict(data1, data2):
 def main():
     data1, data2 = file_type(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     generate_diff_dict(data1, data2)
+
+
+if __name__ == "__main__":
+    main()
