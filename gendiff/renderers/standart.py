@@ -39,7 +39,7 @@ def format_diff(diff, indent=0):
     lines = []
     indent_str = ' ' * indent
     nested_indent_str = ' ' * (indent + 4)
-    nested = ' ' * (indent + 6)
+    nested = ' ' * (indent + 4)
     lines.append(f"{indent_str}{{")
     for key, item in diff.items():
         status = item['status']
@@ -55,7 +55,7 @@ def format_diff(diff, indent=0):
             nested_diff = format_diff(item['children'], indent=indent + 2)
             lines.extend(nested_diff)
         else:
-            lines.append(f"{nested}{format_key(key)}: {format_value(item['value'], indent)}")
+            lines.append(f"{nested_indent_str}{format_key(key)}: {format_value(item['value'], indent)}")
     lines.append(f"{indent_str}}}")
     return lines
 
@@ -67,9 +67,9 @@ def format_key(key):
 def format_value(value, indent):
     if isinstance(value, dict):
         lines = []
-        nested_indent_str = ' ' * (indent + 2)
+        nested_indent_str = ' ' * (indent + 8)
         for key, val in value.items():
-            lines.append(f"{nested_indent_str}{format_key(key)}: {format_value(val, indent + 2)}")
+            lines.append(f"{nested_indent_str}{format_key(key)}: {format_value(val, indent + 4)}")
         return '{\n' + '\n'.join(lines) + '\n' + nested_indent_str + '}'
     elif isinstance(value, bool):
         return str(value).lower()
