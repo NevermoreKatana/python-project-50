@@ -46,22 +46,24 @@ def format_diff(diff, indent=0):
     lines = []
     indent_str = ' ' * indent
     nested_indent_str = ' ' * (indent + 4)
+    lines.append(f"{indent_str}{{")
     for key, item in diff.items():
         status = item['status']
         if status == 'added':
-            lines.append(f"{indent_str}+ {format_key(key)}: {format_value(item['value'], indent)}")
+            lines.append(f"{nested_indent_str}+ {format_key(key)}: {format_value(item['value'], indent)}")
         elif status == 'removed':
-            lines.append(f"{indent_str}- {format_key(key)}: {format_value(item['value'], indent)}")
+            lines.append(f"{nested_indent_str}- {format_key(key)}: {format_value(item['value'], indent)}")
         elif status == 'changed':
-            lines.append(f"{indent_str}- {format_key(key)}: {format_value(item['old_value'], indent)}")
-            lines.append(f"{indent_str}+ {format_key(key)}: {format_value(item['new_value'], indent)}")
+            lines.append(f"{nested_indent_str}- {format_key(key)}: {format_value(item['old_value'], indent)}")
+            lines.append(f"{nested_indent_str}+ {format_key(key)}: {format_value(item['new_value'], indent)}")
         elif status == 'nested':
-            lines.append(f"{indent_str}{format_key(key)}: {{")
+            lines.append(f"{nested_indent_str}{format_key(key)}: {{")
             nested_diff = format_diff(item['children'], indent=indent + 4)
             lines.extend(nested_diff)
-            lines.append(f"{indent_str}}}")
+            lines.append(f"{nested_indent_str}}}")
         else:
-            lines.append(f"{indent_str}  {format_key(key)}: {format_value(item['value'], indent)}")
+            lines.append(f"{nested_indent_str}  {format_key(key)}: {format_value(item['value'], indent)}")
+    lines.append(f"{indent_str}}}")
     return lines
 
 
