@@ -43,31 +43,37 @@ def generate_diff(data1, data2):
 
 
 def format_diff(diff):
-    formatted_diff = {}
+    lines = []
     for key, item in diff.items():
         status = item['status']
         if status == 'added':
-            formatted_diff[f"+ {key}"] = item['value']
+            lines.append(f"+ {key}: {item['value']}")
         elif status == 'removed':
-            formatted_diff[f"- {key}"] = item['value']
+            lines.append(f"- {key}: {item['value']}")
         elif status == 'changed':
-            formatted_diff[f"- {key}"] = item['old_value']
-            formatted_diff[f"+ {key}"] = item['new_value']
+            lines.append(f"- {key}: {item['old_value']}")
+            lines.append(f"+ {key}: {item['new_value']}")
         elif status == 'nested':
             nested_diff = format_diff(item['children'])
-            formatted_diff[key] = nested_diff
+            lines.append(f"{key}:")
+            lines.extend(['  ' + line for line in nested_diff])
         else:
-            formatted_diff[f"  {key}"] = item['value']
-    # print(json.dumps(formatted_diff, indent=2))
-    return formatted_diff
+            lines.append(f"  {key}: {item['value']}")
+    return lines
 
 
 def generate_diff_dict(data1, data2):
     diff = generate_diff(data1, data2)
     formatted_diff = format_diff(diff)
-    formatted_diff = json.dumps(formatted_diff, indent=3)
-    print(formatted_diff)
-    return formatted_diff
+    formatted_diff_str = '\n'.join(formatted_diff)
+    print(formatted_diff_str)
+    return formatted_diff_str
+
+
+def main():
+    data1, data2 = file_type(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
+    generate_diff_dict(data1, data2)
+
 
 
 def main():
