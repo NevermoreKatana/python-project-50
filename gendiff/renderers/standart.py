@@ -67,7 +67,7 @@ def format_key(key):
 def format_value(value, indent):
     if isinstance(value, dict):
         lines = []
-        nested_indent_str = ' ' * (indent + 8)
+        nested_indent_str = ' ' * (indent + 10)
         for key, val in value.items():
             lines.append(f"{nested_indent_str}{format_key(key)}: {format_value(val, indent + 4)}")
         return '{\n' + '\n'.join(lines) + '\n' + nested_indent_str + '}'
