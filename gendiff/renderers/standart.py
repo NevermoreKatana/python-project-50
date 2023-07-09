@@ -42,23 +42,24 @@ def generate_diff(data1, data2):
     return diff
 
 
-def format_diff(diff):
+def format_diff(diff, indent=0):
     lines = []
+    indent_str = ' ' * indent
     for key, item in diff.items():
         status = item['status']
         if status == 'added':
-            lines.append(f"+ {key}: {item['value']}")
+            lines.append(f"{indent_str}+ {key}: {item['value']}")
         elif status == 'removed':
-            lines.append(f"- {key}: {item['value']}")
+            lines.append(f"{indent_str}- {key}: {item['value']}")
         elif status == 'changed':
-            lines.append(f"- {key}: {item['old_value']}")
-            lines.append(f"+ {key}: {item['new_value']}")
+            lines.append(f"{indent_str}- {key}: {item['old_value']}")
+            lines.append(f"{indent_str}+ {key}: {item['new_value']}")
         elif status == 'nested':
-            nested_diff = format_diff(item['children'])
-            lines.append(f"{key}:")
-            lines.extend(['  ' + line for line in nested_diff])
+            lines.append(f"{indent_str}{key}:")
+            nested_diff = format_diff(item['children'], indent=indent + 2)
+            lines.append('\n'.join(nested_diff))
         else:
-            lines.append(f"  {key}: {item['value']}")
+            lines.append(f"{indent_str}  {key}: {item['value']}")
     return lines
 
 
@@ -66,6 +67,7 @@ def generate_diff_dict(data1, data2):
     diff = generate_diff(data1, data2)
     formatted_diff = format_diff(diff)
     formatted_diff_str = '\n'.join(formatted_diff)
+    formatted_diff_str = '{\n' + formatted_diff_str + '\n}'
     print(formatted_diff_str)
     return formatted_diff_str
 
