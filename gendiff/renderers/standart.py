@@ -38,7 +38,7 @@ def generate_diff(data1, data2):
 def format_diff(diff, indent=0):
     lines = []
     indent_str = ' ' * indent
-    nested_indent_str = ' ' * (indent + 2)
+    nested_indent_str = ' ' * (indent + 4)
     lines.append(f"{indent_str}{{")
     for key, item in diff.items():
         status = item['status']
