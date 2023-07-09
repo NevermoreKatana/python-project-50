@@ -78,7 +78,7 @@ def generate_diff_dict(data1, data2):
     diff = generate_diff(data1, data2)
     formatted_diff = format_diff(diff)
     formatted_diff_str = '{\n' + '\n'.join(formatted_diff) + '\n}'
-    print(formatted_diff_str)
+    # print(formatted_diff_str)
     return formatted_diff_str
 
 
