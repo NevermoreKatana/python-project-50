@@ -1,12 +1,6 @@
 import json
 from gendiff.parser import file_type
 
-PATH_TO_FILE1_JSON = "example_files/file1.json"
-PATH_TO_FILE2_JSON = "example_files/file2.json"
-
-PATH_TO_FILE1_YML = 'example_files/file1.yml'
-PATH_TO_FILE2_YML = 'example_files/file2.yml'
-
 
 def compare_values(value1, value2):
     if isinstance(value1, dict) and isinstance(value2, dict):
@@ -38,7 +32,6 @@ def generate_diff(data1, data2):
                              'value': comparison_result.get('value'),
                              'old_value': comparison_result.get('old_value'),
                              'new_value': comparison_result.get('new_value')}
-    # print(json.dumps(diff, indent=2))
     return diff
 
 
@@ -86,24 +79,17 @@ def format_value(value, indent):
 def generate_diff_dict(data1, data2):
     diff = generate_diff(data1, data2)
     formatted_diff = format_diff(diff)
-    formatted_diff_str = '{\n' + '\n'.join(formatted_diff) + '\n}'
+    formatted_diff_str = '\n'.join(formatted_diff)
     print(formatted_diff_str)
     return formatted_diff_str
 
 
 def main():
+    PATH_TO_FILE1_JSON = "example_files/file1.json"
+    PATH_TO_FILE2_JSON = "example_files/file2.json"
     data1, data2 = file_type(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     generate_diff_dict(data1, data2)
 
 
-
-
-
-
-
-
-
-
-
-
-
+if __name__ == '__main__':
+    main()
