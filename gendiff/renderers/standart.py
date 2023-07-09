@@ -46,26 +46,28 @@ def format_diff(diff, indent=0):
     lines = []
     indent_str = ' ' * indent
     nested_indent_str = ' ' * (indent + 2)
+    lines.append(f"{indent_str}{{")
     for key, item in diff.items():
         status = item['status']
         if status == 'added':
-            lines.append(f"{indent_str}+ {format_key(key)}: {format_value(item['value'], indent)}")
+            lines.append(f"{nested_indent_str}+ {format_key(key)}: {format_value(item['value'], indent)}")
         elif status == 'removed':
-            lines.append(f"{indent_str}- {format_key(key)}: {format_value(item['value'], indent)}")
+            lines.append(f"{nested_indent_str}- {format_key(key)}: {format_value(item['value'], indent)}")
         elif status == 'changed':
-            lines.append(f"{indent_str}- {format_key(key)}: {format_value(item['old_value'], indent)}")
-            lines.append(f"{indent_str}+ {format_key(key)}: {format_value(item['new_value'], indent)}")
+            lines.append(f"{nested_indent_str}- {format_key(key)}: {format_value(item['old_value'], indent)}")
+            lines.append(f"{nested_indent_str}+ {format_key(key)}: {format_value(item['new_value'], indent)}")
         elif status == 'nested':
-            lines.append(f"{indent_str}{format_key(key)}:")
+            lines.append(f"{nested_indent_str}{format_key(key)}:")
             nested_diff = format_diff(item['children'], indent=indent + 2)
             lines.extend(nested_diff)
         else:
-            lines.append(f"{indent_str}  {format_key(key)}: {format_value(item['value'], indent)}")
+            lines.append(f"{nested_indent_str}{format_key(key)}: {format_value(item['value'], indent)}")
+    lines.append(f"{indent_str}}}")
     return lines
 
 
 def format_key(key):
-    return key if key.startswith(('+', '-')) else f"  {key}"
+    return key if key.startswith(('+', '-')) else f"{key}"
 
 
 def format_value(value, indent):
@@ -75,6 +77,8 @@ def format_value(value, indent):
         for key, val in value.items():
             lines.append(f"{nested_indent_str}{format_key(key)}: {format_value(val, indent + 2)}")
         return '{\n' + '\n'.join(lines) + '\n' + nested_indent_str + '}'
+    elif isinstance(value, bool):
+        return str(value).lower()
     else:
         return value
 
@@ -90,6 +94,9 @@ def generate_diff_dict(data1, data2):
 def main():
     data1, data2 = file_type(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     generate_diff_dict(data1, data2)
+
+
+
 
 
 
