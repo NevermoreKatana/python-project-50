@@ -10,6 +10,9 @@ cmd_gendiff:
 test:
 	poetry run pytest
 
+t:
+	poetry run t
+
 entry:
 	 poetry run entry example_files/file1.json example_files/file2.json
 
