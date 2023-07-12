@@ -27,15 +27,14 @@ def generate_diff(data1, data2):
 
     def format_value(value, indent):
         if isinstance(value, dict):
-            lines = [f"{indent}  {k}: {format_value(v, indent + '  ')}" for k, v in value.items()]
-            return "{\n" + "\n".join(lines) + f"\n{indent}}}"
+            lines = [f"{indent}    {k}: {format_value(v, indent + '  ')}" for k, v in value.items()]
+            return "{\n" + "\n".join(lines) + f"\n{indent}  }}"
         else:
-            return str(value).lower()
+            return json.dumps(value).lower()
 
     diff = build_diff(data1, data2, "")
 
     return "{\n" + "\n".join(diff) + "\n}"
-
 def main():
     PATH_TO_FILE1_JSON = "example_files/file1.json"
     PATH_TO_FILE2_JSON = "example_files/file2.json"
