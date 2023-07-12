@@ -1,5 +1,5 @@
 from gendiff.renderers.plain import generate_diff_plain
-from gendiff.parser import file_type
+from gendiff.parser import load_files
 
 
 PATH_TO_FILE1_JSON = 'example_files/file1.json'
@@ -16,7 +16,7 @@ def test_plain_json():
     with open(PATH_TO_HEXLET_TEST, 'r') as file:
         file = file.read()
 
-    data1, data2 = file_type(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
+    data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     result = generate_diff_plain(data1, data2)
 
     assert result == file
@@ -26,7 +26,7 @@ def test_plain_yml():
     with open(PATH_TO_HEXLET_TEST, 'r') as file:
         file = file.read()
 
-    data1, data2 = file_type(PATH_TO_FILE1_YML, PATH_TO_FILE2_YML)
+    data1, data2 = load_files(PATH_TO_FILE1_YML, PATH_TO_FILE2_YML)
     result = generate_diff_plain(data1, data2)
 
     assert result == file
@@ -36,7 +36,7 @@ def test_failure_plain_json():
     with open(PATH_TO_FAILURE_TEST, 'r') as file:
         file = file.read()
 
-    data1, data2 = file_type(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
+    data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     result = generate_diff_plain(data1, data2)
 
     assert result != file
@@ -46,7 +46,7 @@ def test_failure_plain_yml():
     with open(PATH_TO_FAILURE_TEST, 'r') as file:
         file = file.read()
 
-    data1, data2 = file_type(PATH_TO_FILE1_YML, PATH_TO_FILE2_YML)
+    data1, data2 = load_files(PATH_TO_FILE1_YML, PATH_TO_FILE2_YML)
     result = generate_diff_plain(data1, data2)
 
     assert result != file

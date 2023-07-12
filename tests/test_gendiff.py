@@ -1,6 +1,6 @@
 import json
 import yaml
-from gendiff.parser import file_type
+from gendiff.parser import load_files
 from gendiff.renderers.standart import (
     compare_values,
     format_diff,
@@ -24,7 +24,7 @@ def test_hexlet_json():
     file = json.load(open(PATH_TO_HEXLET_TEST_JSON))
     file = json.dumps(file, indent=2)
 
-    data1, data2 = file_type(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
+    data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     result = generate_diff_dict(data1, data2)
 
     assert result == file
@@ -34,7 +34,7 @@ def test_failure_json():
     file = json.load(open(PATH_TO_FAILURE_TEST_JSON))
     file = json.dumps(file, indent=2)
 
-    data1, data2 = file_type(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
+    data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     result = generate_diff_dict(data1, data2)
 
     assert result != file
@@ -45,7 +45,7 @@ def test_hexlet_yml():
         fn = yaml.safe_load(f)
         file = json.dumps(fn, indent=2)
 
-    data1, data2 = file_type(PATH_TO_FILE1_YML, PATH_TO_FILE2_YML)
+    data1, data2 = load_files(PATH_TO_FILE1_YML, PATH_TO_FILE2_YML)
     result = generate_diff_dict(data1, data2)
 
     assert result == file
@@ -56,7 +56,7 @@ def test_failure_yml():
         fn = yaml.safe_load(f)
         file = json.dumps(fn, indent=2)
 
-    data1, data2 = file_type(PATH_TO_FILE1_YML, PATH_TO_FILE2_YML)
+    data1, data2 = load_files(PATH_TO_FILE1_YML, PATH_TO_FILE2_YML)
     result = generate_diff_dict(data1, data2)
 
     assert result != file
