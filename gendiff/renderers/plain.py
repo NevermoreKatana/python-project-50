@@ -1,60 +1,10 @@
-def compare_values(value1, value2):
-    if isinstance(value1, dict) and isinstance(value2, dict):
-        return generate_diff(value1, value2)
-    elif value1 == value2:
-        return {'status': 'unchanged', 'value': value1}
-    else:
-        return {'status': 'changed', 'old_value': value1, 'new_value': value2}
+import json
+from gendiff.parser import load_files
 
 
-def generate_diff(data1, data2, path=''):
-    diff = []
-    keys = set(data1.keys()) | set(data2.keys())
-    for key in sorted(keys):
-        current_path = f"{path}.{key}" if path else key
-        if key not in data1:
-            diff.append({
-                'path': current_path,
-                'status': 'added',
-                'value': data2[key]
-            })
-        elif key not in data2:
-            diff.append({
-                'path': current_path,
-                'status': 'removed',
-                'value': data1[key]
-            })
-        else:
-            value1 = data1[key]
-            value2 = data2[key]
-            if isinstance(value1, dict) and isinstance(value2, dict):
-                sub_diff = generate_diff(value1, value2, current_path)
-                diff.extend(sub_diff)
-            else:
-                comparison_result = compare_values(value1, value2)
-                diff.append({
-                    'path': current_path,
-                    **comparison_result
-                })
-    return diff
-
-
-def format_diff_plain(diff):
-    lines = []
-    for item in diff:
-        path = item['path']
-        status = item['status']
-        if status == 'added':
-            value = format_value(item['value'])
-            lines.append(f"Property '{path}' was added with value: {value}")
-        elif status == 'removed':
-            lines.append(f"Property '{path}' was removed")
-        elif status == 'changed':
-            old_value = format_value(item['old_value'])
-            new_value = format_value(item['new_value'])
-            lines.append(f"Property '{path}' was updated."
-                         f" From {old_value} to {new_value}")
-    return lines
+def generate_diff_plain(data1, data2, path=""):
+    diff = build_diff(data1, data2, path)
+    return "\n".join(diff)
 
 
 def format_value(value):
@@ -62,15 +12,38 @@ def format_value(value):
         return "[complex value]"
     elif isinstance(value, str):
         return f"'{value}'"
-    elif value is None:
-        return "null"
     else:
-        return str(value)
+        return json.dumps(value)
 
 
-def generate_diff_plain(data1, data2):
-    diff = generate_diff(data1, data2)
-    diff_string = '\n'.join(format_diff_plain(diff))
-    print(diff_string)
-    print(type(diff_string))
-    return diff_string
+def build_diff(node1, node2, path):
+    diff = []
+
+    keys = sorted(set(list(node1.keys()) + list(node2.keys())))
+
+    for key in keys:
+        value1 = node1.get(key)
+        value2 = node2.get(key)
+
+        if key not in node2:
+            diff.append(f"Property '{path}{key}' was removed")
+        elif key not in node1:
+            diff.append(f"Property '{path}{key}' "
+                        f"was added with value: {format_value(value2)}")
+        elif isinstance(value1, dict) and isinstance(value2, dict):
+            diff.extend(build_diff(value1, value2, f"{path}{key}."))
+        elif value1 == value2:
+            continue
+        else:
+            diff.append(f"Property '{path}{key}' was updated.From "
+                        f"{format_value(value1)} to {format_value(value2)}")
+
+    return diff
+
+
+def main():
+    PATH_TO_FILE1_JSON = "example_files/file1.json"
+    PATH_TO_FILE2_JSON = "example_files/file2.json"
+    data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
+    diff = generate_diff_plain(data1, data2)
+    print(diff)
