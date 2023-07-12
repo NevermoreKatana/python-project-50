@@ -1,8 +1,11 @@
 import json
-
-from gendiff.renderers.json import generate_diff_dict_json
 from gendiff.parser import load_files
-
+from gendiff.renderers.json import (
+    compare_values,
+    generate_diff_json,
+    format_diff,
+    generate_diff_dict_json,
+)
 
 PATH_TO_FILE1_JSON = 'example_files/file1.json'
 PATH_TO_FILE2_JSON = 'example_files/file2.json'
@@ -52,3 +55,4 @@ def test_failure_plain_yml():
     result = generate_diff_dict_json(data1, data2)
 
     assert result != file
+
