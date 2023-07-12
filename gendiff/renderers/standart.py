@@ -1,7 +1,8 @@
 import json
 from gendiff.parser import file_type
 
-def generate_diff(data1, data2):
+
+def generate_dif(data1, data2):
     def build_diff(node1, node2, indent):
         diff = []
         keys = sorted(set(list(node1.keys()) + list(node2.keys())))
@@ -27,17 +28,20 @@ def generate_diff(data1, data2):
 
     def format_value(value, indent):
         if isinstance(value, dict):
-            lines = [f"{indent}    {k}: {format_value(v, indent + '  ')}" for k, v in value.items()]
+            lines = [f"{indent}" \
+                     f"    {k}: {format_value(v, indent + '  ')}"
+                     for k, v in value.items()]
             return "{\n" + "\n".join(lines) + f"\n{indent}  }}"
         else:
             return json.dumps(value).lower()
 
     diff = build_diff(data1, data2, "")
-
     return "{\n" + "\n".join(diff) + "\n}"
+
+
 def main():
     PATH_TO_FILE1_JSON = "example_files/file1.json"
     PATH_TO_FILE2_JSON = "example_files/file2.json"
     data1, data2 = file_type(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
-    diff = generate_diff(data1, data2)
+    diff = generate_dif(data1, data2)
     print(diff)
