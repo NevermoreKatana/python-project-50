@@ -1,4 +1,4 @@
-from gendiff.renderers.standart import generate_diff
+from gendiff.renderers.stylish import generate_diff
 from gendiff.parser import load_files
 from gendiff.renderers.plain import generate_diff_plain
 from gendiff.parser import cmd_gendiff
