@@ -54,7 +54,7 @@ def format_value(value, indent):
 
 def gendiff_stylish(data1, data2):
     diff = generate_diff(data1, data2)
-    # print(diff)
+    print(diff)
     return diff
 
 
