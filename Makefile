@@ -8,7 +8,7 @@ cmd_gendiff:
 	poetry run cmd_gendiff -h
 
 test:
-	poetry run pytest
+	poetry run pytest -vv
 
 t:
 	poetry run t
