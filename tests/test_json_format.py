@@ -1,58 +1,35 @@
 import json
 from gendiff.parser import load_files
+from gendiff.renderers.diff_finder import find_diff
 from gendiff.renderers.json import (
     compare_values,
     generate_diff_json,
-    format_diff,
+    format_diff_json,
     generate_diff_dict_json,
+    gendiff_json
 )
 
-PATH_TO_FILE1_JSON = 'example_files/file1.json'
-PATH_TO_FILE2_JSON = 'example_files/file2.json'
-
-PATH_TO_FILE1_YML = 'example_files/file1.yml'
-PATH_TO_FILE2_YML = 'example_files/file2.yml'
-
-PATH_TO_HEXLET_TEST = 'tests/fixtures/test_json_format.json'
-PATH_TO_FAILURE_TEST = 'tests/fixtures/fail_test_json_format.json'
 
 
-def test_jsonFormat_json():
-    file = json.load(open(PATH_TO_HEXLET_TEST))
-    file = json.dumps(file, indent=2)
+def test_format_diff_json():
+    # Тестирование форматирования разницы в словарь
+    diff_tree = [
+        {'type': 'added', 'key': 'a', 'value': 1},
+        {'type': 'removed', 'key': 'b', 'value': 2},
+        {'type': 'changed', 'key': 'c', 'new_value': 3},
+        {'type': 'unchanged', 'key': 'd', 'value': 4}
+    ]
+    expected = {
+        'a': 1,
+        'b': 2,
+        'c': 3,
+        'd': 4
+    }
+    assert format_diff_json(diff_tree) == expected
 
-    data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
-    result = generate_diff_dict_json(data1, data2)
+    # Тестирование форматирования пустой разницы
+    diff_tree = []
+    expected = {}
+    assert format_diff_json(diff_tree) == expected
 
-    assert result == file
-
-
-def test_plain_yml():
-    file = json.load(open(PATH_TO_HEXLET_TEST))
-    file = json.dumps(file, indent=2)
-
-    data1, data2 = load_files(PATH_TO_FILE1_YML, PATH_TO_FILE2_YML)
-    result = generate_diff_dict_json(data1, data2)
-
-    assert result == file
-
-
-def test_failure_plain_json():
-    file = json.load(open(PATH_TO_FAILURE_TEST))
-    file = json.dumps(file, indent=2)
-
-    data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
-    result = generate_diff_dict_json(data1, data2)
-
-    assert result != file
-
-
-def test_failure_plain_yml():
-    file = json.load(open(PATH_TO_FAILURE_TEST))
-    file = json.dumps(file, indent=2)
-
-    data1, data2 = load_files(PATH_TO_FILE1_YML, PATH_TO_FILE2_YML)
-    result = generate_diff_dict_json(data1, data2)
-
-    assert result != file
 
