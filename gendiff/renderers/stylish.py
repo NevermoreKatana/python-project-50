@@ -52,9 +52,14 @@ def format_value(value, indent):
         return json.dumps(value, ensure_ascii=False).strip('"')
 
 
+def gendiff_stylish(data1, data2):
+    diff = generate_diff(data1, data2)
+    # print(diff)
+    return diff
+
+
 def main():
     PATH_TO_FILE1_JSON = "example_files/file1.yml"
     PATH_TO_FILE2_JSON = "example_files/file2.yml"
     data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
-    diff = generate_diff(data1, data2)
-    print(diff)
+    gendiff_stylish(data1, data2)

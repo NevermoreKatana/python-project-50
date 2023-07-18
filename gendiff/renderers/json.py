@@ -45,7 +45,7 @@ def generate_diff_dict_json(data1, data2):
     return formatted_diff
 
 
-def main():
+def gendiff_json():
     PATH_TO_FILE1_JSON = "example_files/file1.json"
     PATH_TO_FILE2_JSON = "example_files/file2.json"
     data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
@@ -53,3 +53,6 @@ def main():
     diff = json.dumps(diff, indent=2)
     print(json.dumps(diff, indent=2))
     return diff
+
+def main():
+    gendiff_json()
