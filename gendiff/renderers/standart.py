@@ -4,7 +4,7 @@ from gendiff.parser import load_files
 
 def generate_diff(data1, data2):
     diff = build_diff(data1, data2, "")
-    return json.dumps(diff, indent=2)
+    return "{\n" + "\n".join(diff) + "\n}"
 
 
 def format_value(value, indent):
@@ -25,24 +25,18 @@ def build_diff(node1, node2, indent):
         value2 = node2.get(key)
 
         if key not in node2:
-            diff.append({"key": f"{indent}- {key}",
-                         "value": format_value(value1, indent)})
+            diff.append(f"{indent}- {key}: {format_value(value1, indent)}")
         elif key not in node1:
-            diff.append({"key": f"{indent}+ {key}",
-                         "value": format_value(value2, indent)})
+            diff.append(f"{indent}+ {key}: {format_value(value2, indent)}")
         elif isinstance(value1, dict) and isinstance(value2, dict):
-            diff.append({"key": f"{indent}  {key}",
-                         "value": "{", "children":
-                             build_diff(value1, value2, indent + "    ")})
+            diff.append(f"{indent}  {key}: {{")
+            diff.extend(build_diff(value1, value2, indent + "    "))
+            diff.append(f"{indent}  }}")
         elif value1 == value2:
-            diff.append({"key": f"{indent}  {key}",
-                         "value": format_value(value1, indent)})
+            diff.append(f"{indent}  {key}: {format_value(value1, indent)}")
         else:
-            diff.append({"key": f"{indent}- {key}",
-                         "value": format_value(value1, indent)})
-            diff.append({"key": f"{indent}+ {key}",
-                         "value": format_value(value2, indent)})
-
+            diff.append(f"{indent}- {key}: {format_value(value1, indent)}")
+            diff.append(f"{indent}+ {key}: {format_value(value2, indent)}")
     return diff
 
 
@@ -52,3 +46,5 @@ def main():
     data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     diff = generate_diff(data1, data2)
     print(diff)
+
+
