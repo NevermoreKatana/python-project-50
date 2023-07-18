@@ -9,24 +9,21 @@ def generate_diff(data1, data2):
     return diff
 
 
-def format_diff_stylish(diff_tree, indent=""):
-    lines = []
-    lines.append("{")  # Добавление начальной открывающей скобки
-    lines.extend(format_diff_items(diff_tree, indent))
-    lines.append("}")  # Добавление конечной закрывающей скобки
-    return "\n".join(lines)
+def format_diff_stylish(diff_tree):
+    lines = format_diff_items(diff_tree)
+    return "{\n" + "\n".join(lines) + "\n}"
 
 
-def format_diff_items(diff_tree, indent=""):
+def format_diff_items(diff_tree, indent="  "):
     lines = []
     for item in diff_tree:
         node_type = item['type']
         key = item['key']
 
         if node_type == 'nested':
-            nested_diff = format_diff_stylish(item['children'], indent + '    ')
+            nested_diff = format_diff_items(item['children'], indent + '    ')
             lines.append(f"{indent}  {key}: {{")
-            lines.extend(format_diff_items(item['children'], indent + '    '))
+            lines.extend(nested_diff)
             lines.append(f"{indent}  }}")
         elif node_type == 'added':
             value = format_value(item['value'], indent + '    ')
@@ -50,7 +47,7 @@ def format_value(value, indent):
     if isinstance(value, dict):
         lines = [f"{indent}    {k}: {format_value(v, indent + '    ')}"
                  for k, v in value.items()]
-        return "{\n" + "\n".join(lines) + f"\n{indent}  }}"
+        return "{\n" + "\n".join(lines) + f"\n{indent}    }}"
     else:
         return json.dumps(value, ensure_ascii=False).strip('"')
 
