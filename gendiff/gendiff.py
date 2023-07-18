@@ -19,4 +19,5 @@ def main():
 
 def generate_dif(PATH_TO_FILE1, PATH_TO_FILE2):
     data1, data2 = load_files(PATH_TO_FILE1, PATH_TO_FILE2)
-    return generate_diff(data1, data2)
+    diff = generate_diff(data1, data2)
+    return diff
