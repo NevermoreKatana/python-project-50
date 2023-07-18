@@ -20,7 +20,8 @@ def format_diff_plain(diff_tree, path=""):
             lines.append(nested_diff)
         elif node_type == 'added':
             value = format_value(item['value'])
-            lines.append(f"Property '{path}{key}' was added with value: {value}")
+            lines.append(f"Property '{path}{key}' "
+                         f"was added with value: {value}")
         elif node_type == 'removed':
             value = format_value(item['value'])
             lines.append(f"Property '{path}{key}' was removed")

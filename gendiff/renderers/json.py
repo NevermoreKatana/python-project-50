@@ -54,5 +54,6 @@ def gendiff_json():
     print(json.dumps(diff, indent=2))
     return diff
 
+
 def main():
     gendiff_json()

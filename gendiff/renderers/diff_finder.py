@@ -1,4 +1,3 @@
-import json
 
 
 def find_diff(node1, node2):
