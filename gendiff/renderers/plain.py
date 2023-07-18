@@ -1,10 +1,36 @@
 import json
 from gendiff.parser import load_files
+from gendiff.renderers.diff_finder import find_diff
 
 
 def generate_diff_plain(data1, data2, path=""):
-    diff = build_diff(data1, data2, path)
-    return "\n".join(diff)
+    diff_tree = find_diff(data1, data2)
+    diff = format_diff_plain(diff_tree)
+    return diff
+
+
+def format_diff_plain(diff_tree, path=""):
+    lines = []
+    for item in diff_tree:
+        node_type = item['type']
+        key = item['key']
+
+        if node_type == 'nested':
+            nested_diff = format_diff_plain(item['children'], f"{path}{key}.")
+            lines.append(nested_diff)
+        elif node_type == 'added':
+            value = format_value(item['value'])
+            lines.append(f"Property '{path}{key}' was added with value: {value}")
+        elif node_type == 'removed':
+            value = format_value(item['value'])
+            lines.append(f"Property '{path}{key}' was removed")
+        elif node_type == 'changed':
+            old_value = format_value(item['old_value'])
+            new_value = format_value(item['new_value'])
+            lines.append(f"Property '{path}{key}' was updated. "
+                         f"From {old_value} to {new_value}")
+
+    return "\n".join(lines)
 
 
 def format_value(value):
@@ -16,34 +42,10 @@ def format_value(value):
         return json.dumps(value)
 
 
-def build_diff(node1, node2, path):
-    diff = []
-
-    keys = sorted(set(list(node1.keys()) + list(node2.keys())))
-
-    for key in keys:
-        value1 = node1.get(key)
-        value2 = node2.get(key)
-
-        if key not in node2:
-            diff.append(f"Property '{path}{key}' was removed")
-        elif key not in node1:
-            diff.append(f"Property '{path}{key}' "
-                        f"was added with value: {format_value(value2)}")
-        elif isinstance(value1, dict) and isinstance(value2, dict):
-            diff.extend(build_diff(value1, value2, f"{path}{key}."))
-        elif value1 == value2:
-            continue
-        else:
-            diff.append(f"Property '{path}{key}' was updated.From "
-                        f"{format_value(value1)} to {format_value(value2)}")
-
-    return diff
-
-
 def main():
     PATH_TO_FILE1_JSON = "example_files/file1.json"
     PATH_TO_FILE2_JSON = "example_files/file2.json"
     data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     diff = generate_diff_plain(data1, data2)
     print(diff)
+    return diff
