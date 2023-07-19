@@ -4,7 +4,6 @@ from gendiff.renderers.json import (
 
 
 def test_format_diff_json():
-    # Тестирование форматирования разницы в словарь
     diff_tree = [
         {'type': 'added', 'key': 'a', 'value': 1},
         {'type': 'removed', 'key': 'b', 'value': 2},
@@ -19,7 +18,6 @@ def test_format_diff_json():
     }
     assert format_diff_json(diff_tree) == expected
 
-    # Тестирование форматирования пустой разницы
     diff_tree = []
     expected = {}
     assert format_diff_json(diff_tree) == expected
