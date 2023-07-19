@@ -41,7 +41,7 @@ def format_diff_items(diff_tree, indent="    "):
             value = format_value(value, indent + '  ')
             lines.append(f"{indent}+ {key}: {value}")
         elif node_type == 'removed':
-            value = format_value(value, indent + '    ')
+            value = format_value(value, indent + '   ')
             lines.append(f"{indent}- {key}: {value}")
         elif node_type == 'changed':
             old_value = format_value(item['old_value'], indent + '  ')
