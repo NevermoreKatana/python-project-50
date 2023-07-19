@@ -9,7 +9,7 @@ def format_diff_stylish(diff_tree, indent="  "):
     lines = []
     lines.append("{")
     lines.extend(format_diff_items(diff_tree, indent))
-    lines.append(f"{indent}}}")
+    lines.append('}')
     return "\n".join(lines)
 
 
