@@ -45,7 +45,7 @@ def format_value(value):
 
 def gendiff_plain(data1, data2):
     diff = generate_diff_plain(data1, data2)
-    # print(diff)
+    print(diff)
     return diff
 
 
