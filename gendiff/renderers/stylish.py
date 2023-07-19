@@ -13,7 +13,7 @@ def format_diff_stylish(diff_tree, indent="  "):
     lines = []
     lines.append("{")  # Добавление начальной открывающей скобки
     lines.extend(format_diff_items(diff_tree, indent))
-    lines.append("}")  # Добавление конечной закрывающей скобки
+    lines.append(f"{indent}}}")  # Добавление конечной закрывающей скобки с учетом отступа
     return "\n".join(lines)
 
 
@@ -49,7 +49,7 @@ def format_diff_items(diff_tree, indent="  "):
 
 def format_value(value, indent="  "):
     if isinstance(value, dict):
-        lines = [f"{indent}  {k}: {format_value(v, indent + '  ')}"
+        lines = [f"{indent}    {k}: {format_value(v, indent + '    ')}"
                  for k, v in value.items()]
         return "{\n" + "\n".join(lines) + f"\n{indent}  }}"
     else:
