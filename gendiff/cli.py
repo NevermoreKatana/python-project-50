@@ -1,6 +1,6 @@
 import argparse
 
-def cmd_gendiff():
+def exec_app():
     parser = argparse.ArgumentParser(
         description='Compares two configuration files and shows a difference.')
     parser.add_argument("first_file", metavar='<file_path1>')
