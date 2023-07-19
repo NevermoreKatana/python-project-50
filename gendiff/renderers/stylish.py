@@ -10,38 +10,38 @@ def generate_diff_stylish(data1, data2):
 
 
 def format_diff_stylish(diff_tree, indent="  "):
-    lines = ["{"]
+    lines = []
+    lines.append("{")
     lines.extend(format_diff_items(diff_tree, indent))
-    lines.append("}")
+    lines.append('}')
     return "\n".join(lines)
 
 
 def format_diff_items(diff_tree, indent="  "):
     lines = []
-    node_type_format = {
-        'nested': lambda k, v: f"{indent}  {k}: {{\n{v}\n{indent}  }}",
-        'added': lambda k, v: f"{indent}+ {k}: {v}",
-        'removed': lambda k, v: f"{indent}- {k}: {v}",
-        'changed': lambda k, old_v, new_v: f"{indent}- {k}: {old_v}\n{indent}+ {k}: {new_v}",
-        'unchanged': lambda k, v: f"{indent}  {k}: {v}",
-    }
-
     for item in diff_tree:
         node_type = item['type']
         key = item['key']
         value = item.get('value')
-
-        if node_type in ('added', 'removed', 'unchanged'):
+        if node_type == 'nested':
+            nested_diff = format_diff_items(item['children'], indent + '    ')
+            lines.append(f"{indent}  {key}: {{")
+            lines.extend(nested_diff)
+            lines.append(f"{indent}  }}")
+        elif node_type == 'added':
             value = format_value(value, indent + '  ')
-            lines.append(node_type_format[node_type](key, value))
+            lines.append(f"{indent}+ {key}: {value}")
+        elif node_type == 'removed':
+            value = format_value(value, indent + '  ')
+            lines.append(f"{indent}- {key}: {value}")
         elif node_type == 'changed':
             old_value = format_value(item['old_value'], indent + '  ')
             new_value = format_value(item['new_value'], indent + '  ')
-            lines.append(node_type_format[node_type](key, old_value, new_value))
-        elif node_type == 'nested':
-            nested_diff = format_diff_items(item['children'], indent + '    ')
-            lines.append(node_type_format[node_type](key, nested_diff))
-
+            lines.append(f"{indent}- {key}: {old_value}")
+            lines.append(f"{indent}+ {key}: {new_value}")
+        elif node_type == 'unchanged':
+            value = format_value(value, indent + '    ')
+            lines.append(f"{indent}  {key}: {value}")
     return lines
 
 
