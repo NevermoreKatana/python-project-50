@@ -2,7 +2,6 @@ import yaml
 import json
 
 
-
 def load_files(path_to_file1, path_to_file2):
     with open(path_to_file1) as file1:
         with open(path_to_file2) as file2:
