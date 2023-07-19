@@ -25,20 +25,16 @@ def format_diff_items(diff_tree, indent="  "):
             lines.append(f"{indent}  {key}: {{")
             lines.extend(nested_diff)
             lines.append(f"{indent}  }}")
-        elif node_type == 'added':
+        elif node_type in ('added', 'removed', 'unchanged'):
             value = format_value(item['value'], indent + '    ')
-            lines.append(f"{indent}+ {key}: {value}")
-        elif node_type == 'removed':
-            value = format_value(item['value'], indent + '    ')
-            lines.append(f"{indent}- {key}: {value}")
+            sign = '+' if node_type == 'added' \
+                else '-' if node_type == 'removed' else ' '
+            lines.append(f"{indent}{sign} {key}: {value}")
         elif node_type == 'changed':
             old_value = format_value(item['old_value'], indent + '    ')
             new_value = format_value(item['new_value'], indent + '    ')
             lines.append(f"{indent}- {key}: {old_value}")
             lines.append(f"{indent}+ {key}: {new_value}")
-        elif node_type == 'unchanged':
-            value = format_value(item['value'], indent + '    ')
-            lines.append(f"{indent}  {key}: {value}")
 
     return lines
 
