@@ -49,6 +49,7 @@ def gendiff_json(data1, data2):
     diff = generate_diff_json(data1, data2)
     diff = json.dumps(diff, indent=2)
     print(json.dumps(diff, indent=2))
+    print(json)
     return diff
 
 

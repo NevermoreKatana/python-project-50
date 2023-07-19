@@ -6,6 +6,7 @@ from gendiff.renderers.diff_finder import find_diff
 def generate_diff_stylish(data1, data2):
     diff_tree = find_diff(data1, data2)
     diff = format_diff_stylish(diff_tree)
+    print(diff)
     return diff
 
 
