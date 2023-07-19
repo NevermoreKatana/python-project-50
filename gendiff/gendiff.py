@@ -16,7 +16,7 @@ def generate_diff(PATH_TO_FILE1, PATH_TO_FILE2, style='stylish'):
         return gendiff_json(data1, data2)
 
 
-def gendiff():
+def exec_app():
     file1, file2, format = cmd_gendiff()
     diff = generate_diff(file1, file2, format)
     print(diff)
