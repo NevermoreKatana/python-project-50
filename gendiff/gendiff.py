@@ -27,4 +27,4 @@ def exec_app():
     file1, file2, format = cmd_gendiff()
     diff = generate_diff(file1, file2, format)
     print(diff)
-    return diff
+
