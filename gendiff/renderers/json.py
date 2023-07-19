@@ -38,13 +38,6 @@ def format_diff_json(diff_tree):
     return formatted_diff
 
 
-def generate_diff_dict_json(data1, data2):
-    diff = generate_diff_json(data1, data2)
-    formatted_diff = json.dumps(diff, indent=4)
-    print(formatted_diff)
-    return formatted_diff
-
-
 def gendiff_json(data1, data2):
     diff = generate_diff_json(data1, data2)
     diff = json.dumps(diff, indent=2)
