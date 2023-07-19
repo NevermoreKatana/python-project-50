@@ -1,5 +1,4 @@
 import json
-from gendiff.parser import load_files
 from gendiff.renderers.diff_finder import find_diff
 
 
