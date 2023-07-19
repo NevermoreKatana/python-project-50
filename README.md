@@ -23,13 +23,17 @@ make package-install
 ## Usage
 
 ```sh
-poetry run entry -f plain example_files/file1.json example_files/file2.json
+poetry run gendiff -f format path/to/file1 path/to/file2
+```
+## Examples
+```sh
+poetry run gendiff example_files/file1.json example_files/file2.json
 ```
 ```sh
-poetry run entry -f json example_files/file1.json example_files/file2.json
+poetry run gendiff -f plain example_files/file1.json example_files/file2.json
 ```
 ```sh
-poetry run entry example_files/file1.json example_files/file2.json
+poetry run gendiff -f json example_files/file1.json example_files/file2.json
 ```
 
 ### Hexlet tests and linter status:
