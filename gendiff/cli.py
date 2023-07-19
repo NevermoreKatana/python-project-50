@@ -9,4 +9,6 @@ def cmd_gendiff():
                         default=None)
 
     args = parser.parse_args()
+    if args.format == None:
+        args.format = 'stylish'
     return args.first_file, args.second_file, args.format
