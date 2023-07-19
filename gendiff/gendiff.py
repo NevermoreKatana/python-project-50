@@ -24,6 +24,6 @@ def generate_diff(PATH_TO_FILE1, PATH_TO_FILE2, style='stylish'):
         diff = generate_diff_stylish(data1, data2)
     elif style == 'plain':
         diff = gendiff_plain(data1, data2)
-    elif style == 'json'::
+    elif style == 'json':
         diff = gendiff_json(data1, data2)
     return diff
