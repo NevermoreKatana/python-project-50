@@ -65,11 +65,3 @@ def format_value(value, indent="  "):
         return "{\n" + "\n".join(lines) + f"\n{indent}}}"
     else:
         return json.dumps(value, ensure_ascii=False).strip('"')
-
-
-def main():
-    PATH_TO_FILE1_JSON = "example_files/file1.yml"
-    PATH_TO_FILE2_JSON = "example_files/file2.yml"
-    data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
-    diff = generate_diff_stylish(data1, data2)
-    print(diff)

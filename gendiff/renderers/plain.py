@@ -47,10 +47,3 @@ def gendiff_plain(data1, data2):
     diff = generate_diff_plain(data1, data2)
     print(diff)
     return diff
-
-
-def main():
-    PATH_TO_FILE1_JSON = "example_files/file1.json"
-    PATH_TO_FILE2_JSON = "example_files/file2.json"
-    data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
-    gendiff_plain(data1, data2)
