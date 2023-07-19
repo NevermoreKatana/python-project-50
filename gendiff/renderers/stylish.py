@@ -33,7 +33,7 @@ def format_diff_items(diff_tree, indent="    "):
         value = item.get('value')
 
         if node_type == 'nested':
-            nested_diff = format_diff_items(item['children'], indent + '  ')
+            nested_diff = format_diff_items(item['children'], indent + '    ')
             lines.append(f"{indent}  {key}: {{")
             lines.extend(nested_diff)
             lines.append(f"{indent}  }}")
@@ -41,7 +41,7 @@ def format_diff_items(diff_tree, indent="    "):
             value = format_value(value, indent + '  ')
             lines.append(f"{indent}+ {key}: {value}")
         elif node_type == 'removed':
-            value = format_value(value, indent + '  ')
+            value = format_value(value, indent + '    ')
             lines.append(f"{indent}- {key}: {value}")
         elif node_type == 'changed':
             old_value = format_value(item['old_value'], indent + '  ')
@@ -62,10 +62,6 @@ def format_value(value, indent="    "):
         return "{\n" + "\n".join(lines) + f"\n{indent}}}"  # Добавление закрывающей скобки с учетом отступа
     else:
         return json.dumps(value, ensure_ascii=False).strip('"')
-
-
-# Остальной код остается неизменным
-
 
 
 def main():
