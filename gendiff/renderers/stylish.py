@@ -31,7 +31,7 @@ def format_diff_items(diff_tree, indent="  "):
                 else '-' if node_type == 'removed' else ' '
             lines.append(f"{indent}{sign} {key}: {value}")
         elif node_type == 'changed':
-            old_value = format_value(item['old_value'], indent + ' ')
+            old_value = format_value(item['old_value'], indent + '    ')
             new_value = format_value(item['new_value'], indent + '    ')
             lines.append(f"{indent}- {key}: {old_value}")
             lines.append(f"{indent}+ {key}: {new_value}")
@@ -55,7 +55,7 @@ def gendiff_stylish(data1, data2):
 
 
 def main():
-    PATH_TO_FILE1_JSON = "example_files/file1.yml"
-    PATH_TO_FILE2_JSON = "example_files/file2.yml"
+    PATH_TO_FILE1_JSON = "example_files/file1.json"
+    PATH_TO_FILE2_JSON = "example_files/file2.json"
     data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
     gendiff_stylish(data1, data2)
