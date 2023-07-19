@@ -15,14 +15,9 @@ def generate_diff(path_to_file1, path_to_file2, style='stylish'):
         return gendiff_json(data1, data2)
 
 
-def cmd_gendiff():
+def get_argument_generation_references():
     parser = get_parser()
     args = parser.parse_args()
     if args.format is None:
         args.format = 'stylish'
     return args.first_file, args.second_file, args.format
-
-
-def exec_app():
-    file1, file2, format = cmd_gendiff()
-    generate_diff(file1, file2, format)
