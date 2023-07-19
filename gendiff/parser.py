@@ -12,6 +12,3 @@ def load_files(path_to_file1, path_to_file2):
             data1 = json.load(file1)
             data2 = json.load(file2)
         return data1, data2
-
-
-
