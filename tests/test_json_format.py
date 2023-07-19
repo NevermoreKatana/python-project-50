@@ -1,14 +1,6 @@
-import json
-from gendiff.parser import load_files
-from gendiff.renderers.diff_finder import find_diff
 from gendiff.renderers.json import (
-    compare_values,
-    generate_diff_json,
     format_diff_json,
-    generate_diff_dict_json,
-    gendiff_json
 )
-
 
 
 def test_format_diff_json():
@@ -31,5 +23,3 @@ def test_format_diff_json():
     diff_tree = []
     expected = {}
     assert format_diff_json(diff_tree) == expected
-
-
