@@ -22,8 +22,7 @@ def format_diff_items(diff_tree, indent="  "):
         'nested': lambda k, v: f"{indent}  {k}: {{\n{v}\n{indent}  }}",
         'added': lambda k, v: f"{indent}+ {k}: {v}",
         'removed': lambda k, v: f"{indent}- {k}: {v}",
-        'changed': lambda k, old_v, new_v: f"{indent}- {k}:"
-                                           f" {old_v}\n{indent}+ {k}: {new_v}",
+        'changed': lambda k, old_v, new_v: f"{indent}- {k}: {old_v}\n{indent}+ {k}: {new_v}",
         'unchanged': lambda k, v: f"{indent}  {k}: {v}",
     }
 
