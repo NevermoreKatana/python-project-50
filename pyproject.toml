@@ -23,7 +23,8 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
-cmd_gendiff = "gendiff.parser:cmd_gendiff"
+cmd = "gendiff.cli:cmd_gendiff"
+gendiff = "gendiff.gendiff:gendiff"
 parser = "gendiff.parser.parser:main"
 entry = "gendiff.gendiff:main"
 t = "gendiff.renderers.stylish:main"

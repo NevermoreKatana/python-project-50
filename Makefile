@@ -4,20 +4,21 @@ install:
 build:
 	 poetry build
 
-cmd_gendiff:
-	poetry run cmd_gendiff -h
-
 test:
 	poetry run pytest -vv
 
 t:
 	poetry run t
+cmd:
+	poetry run cmd -h
+g:
+	poetry run gendiff example_files/file1.json example_files/file2.json
 
 entry:
 	 poetry run entry example_files/file1.json example_files/file2.json
 
 entry_p:
-	 poetry run entry -f plain example_files/file1.json example_files/file2.json
+	 poetry run entry -f plain
 
 entry_j:
 	 poetry run entry -f json example_files/file1.json example_files/file2.json
