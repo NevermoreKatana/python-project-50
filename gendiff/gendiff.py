@@ -1,5 +1,5 @@
 from gendiff.parser import load_files
-from gendiff.cli import exec_app
+from gendiff.cli import cmd_gendiff
 from gendiff.renderers.plain import gendiff_plain
 from gendiff.renderers.json import gendiff_json
 from gendiff.renderers.stylish import generate_diff_stylish
@@ -17,7 +17,7 @@ def generate_diff(PATH_TO_FILE1, PATH_TO_FILE2, style='stylish'):
 
 
 def gendiff():
-    file1, file2, format = exec_app()
+    file1, file2, format = cmd_gendiff()
     diff = generate_diff(file1, file2, format)
     print(diff)
     return diff
