@@ -22,8 +22,8 @@ def generate_diff(PATH_TO_FILE1, PATH_TO_FILE2, style='stylish'):
     data1, data2 = load_files(PATH_TO_FILE1, PATH_TO_FILE2)
     if style == 'stylish':
         diff = generate_diff_stylish(data1, data2)
-    if style == 'plain':
+    elif style == 'plain':
         diff = gendiff_plain(data1, data2)
-    else:
+    elif style == 'json'::
         diff = gendiff_json(data1, data2)
     return diff
