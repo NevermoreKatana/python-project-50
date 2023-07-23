@@ -11,9 +11,6 @@ def compare_values(value1, value2):
         return {'status': 'changed', 'old_value': value1, 'new_value': value2}
 
 
-
-
-
 def format_diff_json(diff_tree):
     formatted_diff = {}
     for item in diff_tree:
@@ -32,6 +29,7 @@ def format_diff_json(diff_tree):
             formatted_diff[key] = item['value']
 
     return formatted_diff
+
 
 def generate_diff_json(data1, data2):
     diff_tree = find_diff(data1, data2)
