@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hexlet-code"
-version = "1.1.0"
+version = "2.1.0"
 description = "Вычислитель отличий – программа, которая определяет разницу между двумя структурами данных. Это популярная задача, для решения которой существует множество онлайн-сервисов, например, jsondiff. Подобный механизм, например, используется при выводе тестов или при автоматическом отслеживании изменений в конфигурационных файлах."
 authors = ["NevermoreKatana <crymorebch@gmail.com>"]
 license = "Proprietary"
@@ -11,7 +11,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.10"
-PyYAML = "^6.0"
+PyYAML = "6.0"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^6.0.0"
