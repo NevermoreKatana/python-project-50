@@ -1,4 +1,4 @@
-from gendiff.renderers.diff_finder import find_diff
+from gendiff.diff_finder import find_diff
 
 
 def test_find_diff_changed_value():

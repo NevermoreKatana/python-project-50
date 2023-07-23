@@ -1,5 +1,5 @@
 import json
-from gendiff.renderers.diff_finder import find_diff
+from gendiff.diff_finder import find_diff
 
 
 def compare_values(value1, value2):

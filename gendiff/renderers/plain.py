@@ -1,5 +1,5 @@
 import json
-from gendiff.renderers.diff_finder import find_diff
+from gendiff.diff_finder import find_diff
 
 
 def generate_diff_plain(data1, data2, path=""):
