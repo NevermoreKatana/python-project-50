@@ -25,4 +25,4 @@ def get_argument_generation_references():
 
 def exec_app():
     file1, file2, format = get_argument_generation_references()
-    diff = generate_diff(file1, file2, format)
+    print(generate_diff(file1, file2, format))
