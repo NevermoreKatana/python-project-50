@@ -4,6 +4,9 @@ install:
 build:
 	 poetry build
 
+gendif:
+	poetry run gendiff -h
+
 test:
 	poetry run pytest -vv
 
