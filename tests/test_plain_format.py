@@ -4,8 +4,7 @@ from gendiff.parser import load_files
 from gendiff.renderers.plain import (
     generate_diff_plain,
     format_diff_plain,
-    format_value,
-    gendiff_plain
+    format_value
 )
 
 PATH_TO_FILE1_YML = "example_files/file1.yml"
@@ -69,7 +68,7 @@ def test_gendiff_plain_json():
     with open(RESULT_FILE, 'r') as f:
         expected = f.read()
 
-    assert gendiff_plain(data1, data2) == expected
+    assert generate_diff_plain(data1, data2) == expected
 
 
 def test_gendiff_plain_json_failure():
@@ -77,7 +76,7 @@ def test_gendiff_plain_json_failure():
     with open(FAILURE_FILE, 'r') as f:
         expected = f.read()
 
-    assert gendiff_plain(data1, data2) != expected
+    assert generate_diff_plain(data1, data2) != expected
 
 
 def test_gendiff_plain_yml():
@@ -85,7 +84,7 @@ def test_gendiff_plain_yml():
     with open(RESULT_FILE, 'r') as f:
         expected = f.read()
 
-    assert gendiff_plain(data1, data2) == expected
+    assert generate_diff_plain(data1, data2) == expected
 
 
 def test_gendiff_plain_yml_failure():
@@ -93,4 +92,4 @@ def test_gendiff_plain_yml_failure():
     with open(FAILURE_FILE, 'r') as f:
         expected = f.read()
 
-    assert gendiff_plain(data1, data2) != expected
+    assert generate_diff_plain(data1, data2) != expected

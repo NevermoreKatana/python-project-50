@@ -38,6 +38,8 @@ def test_format_diff_json():
 def test_json_format_json():
     with open(PATH_TO_TEST_FILE_JSON, 'r') as file:
         expected = json.load(file)
+        expected = json.dumps(expected, indent=2)
+
     data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
 
     assert generate_diff_json(data1, data2) == expected
@@ -46,6 +48,7 @@ def test_json_format_json():
 def test_json_format_yml():
     with open(PATH_TO_TEST_FILE_YML, 'r') as file:
         expected = json.load(file)
+        expected = json.dumps(expected, indent=2)
 
     data1, data2 = load_files(PATH_TO_FILE1_JSON, PATH_TO_FILE2_JSON)
 
