@@ -1,11 +1,9 @@
 from gendiff.gendiff import get_argument_generation_references
-from gendiff.gendiff import generate_diff
+from gendiff.gendiff import exec_app
 
 
 def main():
-    file1, file2, format = get_argument_generation_references()
-    diff = generate_diff(file1, file2, format)
-
+    exec_app()
 
 if __name__ == '__main__':
-    print(main())
+    main()
