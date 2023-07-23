@@ -18,8 +18,6 @@ def generate_diff(path_to_file1, path_to_file2, style='stylish'):
 def get_argument_generation_references():
     parser = get_parser()
     args = parser.parse_args()
-    if args.format is None:
-        args.format = 'stylish'
     return args.first_file, args.second_file, args.format
 
 
