@@ -1,7 +1,7 @@
 from gendiff.parser import load_files
 from gendiff.cli import get_parser
-from gendiff.renderers.plain import gendiff_plain
-from gendiff.renderers.json import gendiff_json
+from gendiff.renderers.plain import generate_diff_plain
+from gendiff.renderers.json import generate_diff_json
 from gendiff.renderers.stylish import generate_diff_stylish
 
 
@@ -10,9 +10,9 @@ def generate_diff(path_to_file1, path_to_file2, style='stylish'):
     if style == 'stylish':
         return generate_diff_stylish(data1, data2)
     elif style == 'plain':
-        return gendiff_plain(data1, data2)
+        return generate_diff_plain(data1, data2)
     elif style == 'json':
-        return gendiff_json(data1, data2)
+        return generate_diff_json(data1, data2)
 
 
 def get_argument_generation_references():

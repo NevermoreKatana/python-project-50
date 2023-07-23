@@ -2,12 +2,6 @@ import json
 from gendiff.diff_finder import find_diff
 
 
-def generate_diff_plain(data1, data2, path=""):
-    diff_tree = find_diff(data1, data2)
-    diff = format_diff_plain(diff_tree)
-    return diff
-
-
 def format_diff_plain(diff_tree, path=""):
     lines = []
     for item in diff_tree:
@@ -40,3 +34,9 @@ def format_value(value):
         return f"'{value}'"
     else:
         return json.dumps(value)
+
+
+def generate_diff_plain(data1, data2, path=""):
+    diff_tree = find_diff(data1, data2)
+    diff = format_diff_plain(diff_tree)
+    return diff
