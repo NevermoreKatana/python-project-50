@@ -7,11 +7,11 @@ from gendiff.renderers.plain import (
     format_value
 )
 
-PATH_TO_FILE1_YML = "example_files/file1.yml"
-PATH_TO_FILE2_YML = "example_files/file2.yml"
+PATH_TO_FILE1_YML = "tests/fixtures/file1.yml"
+PATH_TO_FILE2_YML = "tests/fixtures/file2.yml"
 
-PATH_TO_FILE1_JSON = "example_files/file1.json"
-PATH_TO_FILE2_JSON = "example_files/file2.json"
+PATH_TO_FILE1_JSON = "tests/fixtures/file1.json"
+PATH_TO_FILE2_JSON = "tests/fixtures/file2.json"
 
 RESULT_FILE = 'tests/fixtures/plain_test.txt'
 FAILURE_FILE = 'tests/fixtures/plain_failure_test.txt'

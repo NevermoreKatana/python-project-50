@@ -2,11 +2,11 @@ import json
 from gendiff.renderers.json import generate_diff_json
 from gendiff.parser import load_files
 
-PATH_TO_FILE1_JSON = 'example_files/file1.json'
-PATH_TO_FILE2_JSON = 'example_files/file2.json'
+PATH_TO_FILE1_JSON = 'tests/fixtures/file1.json'
+PATH_TO_FILE2_JSON = 'tests/fixtures/file2.json'
 
-PATH_TO_FILE1_YML = 'example_files/file1.yml'
-PATH_TO_FILE2_YML = 'example_files/file2.yml'
+PATH_TO_FILE1_YML = 'tests/fixtures/file1.yml'
+PATH_TO_FILE2_YML = 'tests/fixtures/file2.yml'
 
 PATH_TO_TEST_FILE_JSON = 'tests/fixtures/test_json.json'
 PATH_TO_TEST_FAILURE_FILE_JSON = 'tests/fixtures/test_failure_json.json'
